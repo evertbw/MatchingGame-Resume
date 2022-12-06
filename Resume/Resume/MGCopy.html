@@ -3,7 +3,7 @@
     <head>
         <meta name="Author" content="Bria Evert">
         <meta name="Course" content="CIS 3623">
-        <title>Matching Mania</title>
+        <title>Matching Mania Copy</title>
         <script>
             function StartGame(){
                 console.log("show-none")
@@ -58,20 +58,18 @@
             {name: "peas", img: "6.JPG", }, 
         ];
 
+// New 
+        documet.querySelectorAll(".flip-card-click");
+
+        function flipCard(){
+            this.classList.toggle("flip");
+
+        }
+        cards.forEach((card) => card.addEventListener("click", flipCard));
 
 
-        document.querySelectorAll(".flip-card-click").forEach(function(e) {     
-             e.addEventListener("click", function () { 
-               this.classList.toggle('flipped'); 
-       console.log("click first card")
-                
-            })
-            })
         }
             
-
-        
-    
 
         </script>
         <style>
@@ -118,6 +116,9 @@
                 transform: rotateY(180deg);
             }
 
+            .flipped{
+                transform: rotateY(180deg);
+            }
             #easy-seen{display: none;}
 
             #med-seen {display: none; grid-template-columns:130px 130px 130px 130px; padding: 5px;}
@@ -149,7 +150,7 @@
 <!-- Easy Lvl -->
         <section id="easy-seen"><p>20 moves</p>
         <!-- Row 1-->
-        <div class="flip-card-click">
+        <div class="flip-card-click" onclick="trackCardClicks(this);">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover">

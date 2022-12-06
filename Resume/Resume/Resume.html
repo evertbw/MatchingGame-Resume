@@ -4,25 +4,18 @@
         <meta name="Author" content="Bria Evert">
         <meta name="Course" content="CIS 3623">
         <title>Resume</title>
-    <script>
-        function Quote(){
-        console.log("Quote")
-        
-        }
-
-
-    </script>
 
     <style>
-        header {background-color: aqua; padding: 20px; font-size: xx-large; font-family: georgia;}
-        footer {background-color: aqua; padding: 5px; margin:40px;}
+        header {background-color: rgb(255, 135, 135); padding: 20px; font-size: xx-large; 
+                font-family: 'Times New Roman', Times, serif;}
+        footer {background-color: rgb(255, 211, 129); padding: 5px; margin:40px;}
         a {text-decoration: none;}
         .nav-style {text-align: center;text-decoration:none;}
-        a:hover {background-color:#FFEFD5;}
+        a:hover {background-color:rgb(255, 211, 129);}
         .contact {font-size: medium;}
-        h2 {font-family: georgia; text-align: center;font-style: bold;}
-        .edu-hobby {background-color: lightcyan; padding: 20px;text-align: justify;}
-        .work {background-color: #FFEFD5; padding: 30px;}
+        h2 {font-family: 'Times New Roman', Times, serif; text-align: center;font-style: bold;}
+        .edu-hobby {background-color: rgb(255, 135, 135); padding: 20px;text-align: justify;}
+        .game-work {background-color: rgb(255, 211, 129); padding: 30px;}
         .job {font-style: italic;font-size: large;}
         .mission {
             color: black;
@@ -34,19 +27,21 @@
             }
         img {width: 250px; height: 250px;float:left; 
             padding-top:20px; padding-right:100px;}
-        a:link {color: blue;}
-        a:visited {color: purple;}
+        a:link {color: black;}
+        a:visited {color: rgb(255, 135, 135);}
         table {border-collapse: collapse; margin-left:auto; margin-right:auto;}
         th, td {
             padding: .5em; text-align: center; vertical-align: bottom;
             border: thin; border-style: solid;}
          th{
-            background-color:#FFEFD5;
+            background-color:rgb(255, 211, 129);
             color: black;}
         video {float: right; 
             padding-right: 100px; padding-left: 0px;
             margin: auto;}
         .mission-statement {padding: 5px;}
+        .nav-style {text-align: center;}
+        #MGstyle {font-size: 20px; padding-left: 550px;}
 
     </style>
         </head>
@@ -54,7 +49,7 @@
     <body>
         <div class="mission-statement">
             <aside class="mission">
-                <input type="button" value="Mission Statement" onclick="Quote();"><br>
+               Mission Statement:<br>
                 "You miss 100% of the shots you don't take."
             </aside>
         </div>
@@ -72,12 +67,17 @@
         </header>
         <nav>
         <p class="nav-style">
+            <a href="#MG">Matching Game</a> &nbsp; &nbsp; |
             &nbsp; <a href="#Education">Education</a> &nbsp; &nbsp; | 
             &nbsp; <a href="#WorkExperience">Work Experience</a> &nbsp; &nbsp; |
             &nbsp; <a href="#Hobbies">Hobbies/Extracurricular Activites</a>
         </p>
     </nav>
         <article> 
+            <section><h2 id="MG">Matching Game</h2></section>
+            <div class="game-work">
+                <a href="MGStart.html" id="MGstyle">Click to check out my Matching Mania</a>
+            </div>
             <section><h2 id="Education">Education</h2>
         <div class="edu-hobby">
             <strong>Bachelor of Professional Accountancy</strong> <br>
@@ -87,7 +87,7 @@
         </section>
 
         <section><h2 id="WorkExperience">Work Experience</h2>
-        <div class="work">
+        <div class="game-work">
             <ul>
                 <li class="job">Accounting Internship (June 2022 - Present)</li>
                     Investments and Wealth Institute, Greenwood Village, CO <br>
@@ -120,7 +120,7 @@
                 <source src="./Images/PBvid.mp4">
             </video>
         <figure class="PB-image"> 
-            <img src="./Images/PB.jpeg" alt="Pickleball">
+            <img src="PBImage.JPG" alt="Pickleball">
         </figure>
         <div class="edu-hobby">
             <table>
