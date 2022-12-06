@@ -71,7 +71,9 @@
                 }
                 
                 )
-                })
+              })
+                function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
             }
 
 
@@ -80,14 +82,12 @@
             var card1 = null
             var card2 = null
 
-        function trackCardClicks() {
-            console.log("clicked " + card1)
+        function  trackCardClicks(theCard) {
+            console.log("clicked " + theCard)
             if (card1 == null) {
-                card1 = card1.classList.toggle('flipped');
-                card1 = null
+                card1 = theCard
             } else if (card2 == null) {
-                card2 = card2.classList.toggle('flipped');
-                card2 = null
+                card2 = theCard
             }
             if (card1 != null) {
                 console.log("card1 is : " + card1)
@@ -98,13 +98,18 @@
                 console.log("card2 is : " + card2)
             } else {
                 console.log("card2 is not a match")
+
             }
 
             if ((card1 != null) && (card2 != null)) {
                 console.log("Two cards clicked : " + card1 + " and " + card2)
-                
+                sleep (3000)
+                card1 = card1.classList.toggle('flipped');
+                card2 = card2.classList.toggle('flipped');
             }
+
         }
+    }
   
         </script>
         <style>
@@ -160,6 +165,9 @@
             .flip-card-back {
                 transform: rotateY(180deg);
             }
+            input {font-size: 15px; background: rgb(255, 135, 135);
+                padding-top: 10px; padding-bottom: 10px; padding-left: 25px; padding-right: 25px}
+
 
             #easy-seen{display: none;}
 
@@ -188,7 +196,7 @@
         <input type="radio" name="difficulty" value="hard" id="hard"> Hard &nbsp;&nbsp;
         </fieldset></p>
         </form>
-        <input type="button" id="Start" value="Get Started!" onclick="StartGame();"></input><br><br>
+        <input type="button" id="Start" value="Start" onclick="StartGame();"></input><br><br>
 <!-- Easy Lvl -->
         <section id="easy-seen"><p>20 moves</p>
         <!-- Row 1-->

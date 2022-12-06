@@ -24,7 +24,7 @@
 
                 if (ChoiceSelected === "easy"){
                 console.log("3x4 Match")
-                    EasyLvl.style.display ="inline-block"
+                    EasyLvl.style.display ="inline-grid"
                     MedLvl.style.display = "none" 
                     HardLvl.style.display = "none" 
                 }else if (ChoiceSelected === "medium"){
@@ -38,7 +38,6 @@
                     MedLvl.style.display = "none"
                     EasyLvl.style.display = "none" 
                 }
-            
             
         //New Stuff
 
@@ -59,17 +58,7 @@
         ];
 
 // New 
-        documet.querySelectorAll(".flip-card-click");
-
-        function flipCard(){
-            this.classList.toggle("flip");
-
-        }
-        cards.forEach((card) => card.addEventListener("click", flipCard));
-
-
-        }
-            
+            }
 
         </script>
         <style>
@@ -79,46 +68,40 @@
              fieldset {display: inline; align-items: center; justify-content: center; font-size: 17px;}
             img {width: 130px; height: 130px; border-radius: 5px;}
 
-             .card {padding: 2px; position: relative;}
-            .flip-card-inner{
-                position: relative;
-                width: 100%;
-                height: 100%;
-                transition: transform 0.5s;
-                transform-style: preserve-3d;
+            .flipCard {
+            border-radius: 5px;
+            width: 130px;
+            height: 130px;
+            position: relative;
+            margin: 5px auto ;
             }
-            .flip-card-front,.flip-card-back {
-                position: absolute;
-                backface-visibility: hidden;
-                border-radius: 5px;
-}
-            .flip-card-back {
-                transform: rotateY(180deg);
-                }       
+            .flipCard .card.flipped {
+            transform:rotatey(-180deg); 
+            }
+            .flipCard .card {
+            width: 130px;
+            height: 130px;
+            transform-style: preserve-3d;
+            transition: 0.5s;
 
-            .flip-card, .flip-card-click {
-                display: inline-block;
-                background-color: transparent;
+            }
+            .flipCard .card .side {
                 width: 130px;
                 height: 130px;
+                cursor: pointer;
+                position: absolute;
+                backface-visibility: hidden; 
+                display: flex;
+                align-items: center;
+                
+             }
+            .flipCard .card .back {
+                background: white;
+                color: black;
+                border-radius: 5px;
+                transform:rotatey(-180deg); 
             }
 
-            .flip-card:focus .flip-card-inner,
-            .flip-card:focus-within .flip-card-inner,
-            .flip-card:active .flip-card-inner,
-            .flip-card-click:focus .flip-card-inner,
-            .flip-card-click:active .flip-card-inner,
-            .flip-card-click.flipped .flip-card-inner {
-                transform: rotateY(180deg);
-            }
-
-            .flip-card-back {
-                transform: rotateY(180deg);
-            }
-
-            .flipped{
-                transform: rotateY(180deg);
-            }
             #easy-seen{display: none;}
 
             #med-seen {display: none; grid-template-columns:130px 130px 130px 130px; padding: 5px;}
@@ -150,132 +133,119 @@
 <!-- Easy Lvl -->
         <section id="easy-seen"><p>20 moves</p>
         <!-- Row 1-->
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/1.JPG" alt="avo"id="avo">
                 </div>
             </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/2.JPG" alt="BT" id="BT">
                 </div>
             </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/3.JPG" alt="cheese">
                 </div>
-            </div>
-        </div>
-        <section></section>
+            </div>  
         <!-- Row 2 -->
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/4.JPG" alt="CM">
                 </div>
-            </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div>    
+         <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/5.JPG" alt="panda">
                 </div>
-            </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div> 
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/6.JPG" alt="peas">
                 </div>
-            </div>
-        </div>
+            </div>   
         <section></section>
         <!-- Row 3 -->
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
-                    <img src="Images/1.JPG" alt="avo">
+                <div class="side back">
+                    <img src="Images/1.JPG" alt="avo"id="avo">
                 </div>
             </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
-                </div>
-                <div class="flip-card-back">
-                    <img src="Images/2.JPG" alt="BT">
-                </div>
-            </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
+                    <img src="Images/2.JPG" alt="BT" id="BT">
+                </div>
+            </div>
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="side back">
                     <img src="Images/3.JPG" alt="cheese">
                 </div>
-            </div>
-        </div>
-        <section></section>
-        <!-- Row 4 -->
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div>  
+        <!-- Row  -->
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/4.JPG" alt="CM">
                 </div>
-            </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div>    
+         <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="side back">
                     <img src="Images/5.JPG" alt="panda">
                 </div>
-            </div>
-        </div>
-        <div class="flip-card-click" >
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div> 
+        <div class="flipCard" >
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
-                    <img src="Images/6.JPG" alt="peas" >
+                <div class="side back">
+                    <img src="Images/6.JPG" alt="peas">
                 </div>
-            </div>
-        </div>
+            </div>   
+
     </section>
     
 <!-- Med Lvl -->
