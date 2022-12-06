@@ -1,0 +1,418 @@
+<!DOCTYPE html>  
+<html lang="eng"> 
+    <head>
+        <meta name="Author" content="Bria Evert">
+        <meta name="Course" content="CIS 3623">
+        <title>Matching Mania</title>
+        <script>
+            function StartGame(){
+                console.log("show-none")
+
+                var radioButton = document.getElementsByName("difficulty")
+                console.log(radioButton)
+
+                var ChoiceSelected = ""
+                for (let i = 0; i < radioButton.length; i = i + 1){ 
+                    console.log(radioButton[i])
+                    if (radioButton[i].checked){
+                        ChoiceSelected = radioButton[i].value
+                    }
+                }
+                var EasyLvl = document.getElementById("easy-seen")
+                var MedLvl = document.getElementById("med-seen")
+                var HardLvl = document.getElementById("hard-seen")
+
+                if (ChoiceSelected === "easy"){
+                console.log("3x4 Match")
+                    EasyLvl.style.display ="inline-block"
+                    MedLvl.style.display = "none" 
+                    HardLvl.style.display = "none" 
+                }else if (ChoiceSelected === "medium"){
+                console.log("4x4 Match")
+                    MedLvl.style.display = "grid"
+                    EasyLvl.style.display = "none"
+                    HardLvl.style.display  = "none" 
+                }else if (ChoiceSelected === "hard"){
+                    console.log("5x4 Match")
+                    HardLvl.style.display = "grid"
+                    MedLvl.style.display = "none"
+                    EasyLvl.style.display = "none" 
+                }
+            
+            
+        //New Stuff
+
+        //Cards to Match 
+        let cardArray = [
+            {name: "avo", img: "1.JPG", }, 
+            {name: "avo", img: "1.JPG", }, 
+            {name: "BT", img: "2.JPG", }, 
+            {name: "BT", img: "2.JPG", },
+            {name: "cheese", img: "3.JPG", }, 
+            {name: "cheese", img: "3.JPG", }, 
+            {name: "CM", img: "4.JPG", }, 
+            {name: "CM", img: "4.JPG", },  
+            {name: "panda", img: "5.JPG", }, 
+            {name: "panda", img: "5.JPG", }, 
+            {name: "peas", img: "6.JPG", }, 
+            {name: "peas", img: "6.JPG", }, 
+        ];
+
+
+
+        document.querySelectorAll(".flip-card-click").forEach(function(e) {     
+             e.addEventListener("click", function () { 
+               this.classList.toggle('flipped'); 
+       console.log("click first card")
+                
+            })
+            })
+        }
+            
+
+        
+    
+
+        </script>
+        <style>
+            *{ font-family: 'Times New Roman', Times, serif; background-color:rgb(255, 211, 129);}
+             body {text-align: center;}
+             h1 {font-size:40px;}
+             fieldset {display: inline; align-items: center; justify-content: center; font-size: 17px;}
+            img {width: 130px; height: 130px; border-radius: 5px;}
+
+             .card {padding: 2px; position: relative;}
+            .flip-card-inner{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transition: transform 0.5s;
+                transform-style: preserve-3d;
+            }
+            .flip-card-front,.flip-card-back {
+                position: absolute;
+                backface-visibility: hidden;
+                border-radius: 5px;
+}
+            .flip-card-back {
+                transform: rotateY(180deg);
+                }       
+
+            .flip-card, .flip-card-click {
+                display: inline-block;
+                background-color: transparent;
+                width: 130px;
+                height: 130px;
+            }
+
+            .flip-card:focus .flip-card-inner,
+            .flip-card:focus-within .flip-card-inner,
+            .flip-card:active .flip-card-inner,
+            .flip-card-click:focus .flip-card-inner,
+            .flip-card-click:active .flip-card-inner,
+            .flip-card-click.flipped .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-card-back {
+                transform: rotateY(180deg);
+            }
+
+            #easy-seen{display: none;}
+
+            #med-seen {display: none; grid-template-columns:130px 130px 130px 130px; padding: 5px;}
+            .row1-1, .row1-2, .row1-3, .row1-4, .row1-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+            .row2-1, .row2-2, .row2-3, .row2-4, .row2-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+            .row3-1, .row3-2, .row3-3, .row3-4, .row3-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+            .row4-1, .row4-2, .row4-3, .row4-4, .row4-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+
+            #hard-seen {display: none; grid-template-columns:130px 130px 130px 130px 130px; padding: 5px;}
+            .row1-1, .row1-2, .row1-3, .row1-4, .row1-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+            .row2-1, .row2-2, .row2-3, .row2-4, .row2-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+            .row3-1, .row3-2, .row3-3, .row3-4, .row3-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+            .row4-1, .row4-2, .row4-3, .row4-4, .row4-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+
+        </style>
+    </head>
+    <body>
+        <h1>Matching Mania</h1>
+        
+        <form>
+        <fieldset>
+        <legend>Choose your level of difficulty:</legend>
+        <input type="radio" name="difficulty" value="easy" id="easy" checked>Easy &nbsp;&nbsp;
+        <input type="radio" name="difficulty" value="medium" id="medium">Medium &nbsp;&nbsp;
+        <input type="radio" name="difficulty" value="hard" id="hard"> Hard &nbsp;&nbsp;
+        </fieldset></p>
+        </form>
+        <input type="button" id="Start" value="Get Started!" onclick="StartGame();"></input><br><br>
+<!-- Easy Lvl -->
+        <section id="easy-seen"><p>20 moves</p>
+        <!-- Row 1-->
+        <div class="flip-card-click">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/1.JPG" alt="avo"id="avo">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/2.JPG" alt="BT" id="BT">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/3.JPG" alt="cheese">
+                </div>
+            </div>
+        </div>
+        <section></section>
+        <!-- Row 2 -->
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/4.JPG" alt="CM">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/5.JPG" alt="panda">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/6.JPG" alt="peas">
+                </div>
+            </div>
+        </div>
+        <section></section>
+        <!-- Row 3 -->
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/1.JPG" alt="avo">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/2.JPG" alt="BT">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/3.JPG" alt="cheese">
+                </div>
+            </div>
+        </div>
+        <section></section>
+        <!-- Row 4 -->
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/4.JPG" alt="CM">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/5.JPG" alt="panda">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" >
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/6.JPG" alt="peas" >
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<!-- Med Lvl -->
+        <section id="med-seen">
+            <!-- Row 1 -->
+            <div class="row1-1 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row1-2 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row1-3 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row1-4 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <!-- Row 2-->
+            <div class="row2-1 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row2-2 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row2-3 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row2-4 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <!-- Row 3-->
+            <div class="row3-1 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row3-2 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row3-3 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="row2-4 Color">
+                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <!-- Row 4 -->
+        <div class="row4-1 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row4-2 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row4-3 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row4-4 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        </section>
+
+<!-- Hard Lvl-->
+        <section id="hard-seen">
+        <!-- Row 1 -->
+        <div class="row1-1 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row1-2 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row1-3 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row1-4 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row1-5 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+       <!-- Row 2-->
+        <div class="row2-1 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row2-2 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row2-3 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row2-4 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row2-5 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <!-- Row 3 -->
+        <div class="row3-1 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row3-2 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row3-3 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row3-4 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row3-5 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <!-- Row 4 -->
+        <div class="row4-1 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row4-2 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row4-3 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row4-4 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="row4-5 Color">
+            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+    </section>
+    <br><br>
+    <p>What did you think of the game?</p>
+    <textarea rows="3" cols="30"></textarea>
+        <!--
+        <table>
+            
+                1. Smart Cookie*     2. Peas out*     3. Taco bout it*
+                4. Avo good day*     5. Choc Milk     8. bluetooth*        
+                9.cheesy*            10. pandastic*
+            
+    -->
+    
+
+
+    </body>
+</html>
