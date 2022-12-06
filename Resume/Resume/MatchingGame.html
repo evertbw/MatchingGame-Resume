@@ -72,6 +72,7 @@
                 
                 )
               })
+            }
                 function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
             }
@@ -104,12 +105,16 @@
             if ((card1 != null) && (card2 != null)) {
                 console.log("Two cards clicked : " + card1 + " and " + card2)
                 sleep (3000)
+                if(card1 != null){
                 card1 = card1.classList.toggle('flipped');
+                }
+                if(card2 != null) {
                 card2 = card2.classList.toggle('flipped');
+                }
             }
 
         }
-    }
+    
   
         </script>
         <style>
