@@ -27,113 +27,121 @@
                     EasyLvl.style.display ="inline-block"
                     MedLvl.style.display = "none" 
                     HardLvl.style.display = "none" 
-                }else if (ChoiceSelected === "medium"){
+                } else if (ChoiceSelected === "medium"){
                 console.log("4x4 Match")
                     MedLvl.style.display = "grid"
                     EasyLvl.style.display = "none"
                     HardLvl.style.display  = "none" 
-                }else if (ChoiceSelected === "hard"){
+                } else if (ChoiceSelected === "hard"){
                     console.log("5x4 Match")
                     HardLvl.style.display = "grid"
                     MedLvl.style.display = "none"
                     EasyLvl.style.display = "none" 
                 }
             
-        //New Stuff
-
-        let cardArray = [
-            {name: "avo", img: "1.JPG", }, 
-            {name: "avo", img: "1.JPG", }, 
-            {name: "BT", img: "2.JPG", }, 
-            {name: "BT", img: "2.JPG", },
-            {name: "cheese", img: "3.JPG", }, 
-            {name: "cheese", img: "3.JPG", }, 
-            {name: "CM", img: "4.JPG", }, 
-            {name: "CM", img: "4.JPG", },  
-            {name: "panda", img: "5.JPG", }, 
-            {name: "panda", img: "5.JPG", }, 
-            {name: "peas", img: "6.JPG", }, 
-            {name: "peas", img: "6.JPG", }, 
-        ];
-
-        
-        // How to flip the card
+            // How to flip the card
    
             function ClickCard(){
                 console.log(".flip-card-click")
-
-
             }
+
             document.querySelectorAll(".flip-card-click").forEach(function(e) { 
                 e.addEventListener("click", function () { 
                     this.classList.toggle('flipped'); 
-                    console.log("clicked card One")
-                }
-                
+                }  
                 )
               })
             }
-                function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+        
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
             }
 
-
-       //Flip 2 cards
+            //Flip 2 cards
 
             var card1 = null
             var card2 = null
+            var numberClicksEasy = 25
+            var matchCount = 0
 
-        function  trackCardClicks(theCard) {
-            console.log("clicked " + theCard)
-            if (card1 == null) {
-                card1 = theCard
-            } else if (card2 == null) {
-                card2 = theCard
-            }
-            if (card1 != null) {
-                console.log("card1 is : " + card1)
-            } else {
-                console.log("card1 is not a match")
-            }
-            if (card2 != null) {
-                console.log("card2 is : " + card2)
-            } else {
-                console.log("card2 is not a match")
+            async function trackCardClicks(theCard) {
+                console.log("clicked " + theCard.getAttribute("data-name"))
 
-            }
+                numberClicksEasy = numberClicksEasy - 1
+                var countDown = document.getElementById("numberCountDown")
+                countDown.innerHTML = "Number of Moves left: " + numberClicksEasy
 
-            if ((card1 != null) && (card2 != null)) {
-                console.log("Two cards clicked : " + card1 + " and " + card2)
-                sleep (3000)
-                if(card1 != null){
-                card1 = card1.classList.toggle('flipped');
+                if (card1 == null) {
+                    card1 = theCard
+                } else if (card2 == null) {
+                    card2 = theCard
                 }
-                if(card2 != null) {
-                card2 = card2.classList.toggle('flipped');
-                }
-            }
 
+                if ((card1 != null) && (card2 != null)) {
+                    console.log("Two cards clicked : " + card1.getAttribute("data-name") + " and " + card2.getAttribute("data-name"))
+                    await sleep(500)
+                
+                    if (card1.getAttribute("data-name") == card2.getAttribute("data-name")){
+                        console.log("have a match")
+                        matchCount = matchCount + 1
+                        console.log("counting match")
+                    }else {if(card1 != null){
+                        card1.classList.toggle('flipped');
+                    }
+                    if(card2 != null) {
+                        card2.classList.toggle('flipped');
+                    }
+                } 
+                card1 = null
+                card2 = null   
+            }   
         }
-    
+
+        // Game Check - way to end game
+        var refreshInterval = setInterval(check, 100)
+
+
+        function check(){
+
+            var EasyLvl = document.getElementById("easy-seen")
+            var MedLvl = document.getElementById("med-seen")
+            var HardLvl = document.getElementById("hard-seen")
+
+            if (numberClicksEasy === 0){
+                alert("Game Over")
+                clearInterval(refreshInterval)
+                EasyLvl.innerHTML = "Please refresh."
+                MedLvl.innerHTML = "Please refresh." 
+                HardLvl.innerHTML = "Please refresh." 
+            } else if (matchCount === 6){
+                alert("You win!")
+                clearInterval(refreshInterval)
+                EasyLvl.innerHTML ="Please refresh."
+                MedLvl.innerHTML = "Please refresh." 
+                HardLvl.innerHTML = "Please refresh."
+            }
+        }
+
   
         </script>
         <style>
             a:hover {background-color:rgb(255, 135, 135);}
             a {color: black}
 
-            *{ font-family: 'Times New Roman', Times, serif; background-color:rgb(255, 211, 129);}
+            *{ font-family: 'Times New Roman', Times, serif; background-color:rgb(255, 211, 129);
+                font-size: 17px;}
              body {text-align: center;}
-             h1 {font-size:40px;}
-             fieldset {display: inline; align-items: center; justify-content: center; font-size: 17px;}
-            img {width: 130px; height: 130px; border-radius: 5px;}
+             h1 {font-size:50px;}
+             fieldset {display: inline; align-items: center; justify-content: center;}
+            img {width: 150px; height: 150px; border-radius: 5px;}
 
-             .card {padding: 2px; position: relative;}
             .flip-card{
                 background-color: transparent;
-                width: 130px;
-                height: 130px;
+                width: 150px;
+                height: 150px;
                 perspective: 800px;
                 border-radius: 5px;
+                padding: 5px
             }
             .flip-card-inner{
                 position: relative;
@@ -141,6 +149,7 @@
                 height: 100%;
                 transition: transform 0.5s;
                 transform-style: preserve-3d;
+                padding: 5px
             }
             .flip-card-front,.flip-card-back {
                 position: absolute;
@@ -154,8 +163,8 @@
             .flip-card, .flip-card-click {
                 display: inline-block;
                 background-color: transparent;
-                width: 130px;
-                height: 130px;
+                width: 150px;
+                height: 150px;
             }
 
             .flip-card:focus .flip-card-inner,
@@ -170,8 +179,7 @@
             .flip-card-back {
                 transform: rotateY(180deg);
             }
-            input {font-size: 15px; background: rgb(255, 135, 135);
-                padding-top: 10px; padding-bottom: 10px; padding-left: 25px; padding-right: 25px}
+            input {background: rgb(255, 135, 135);padding-top: 10px; padding-bottom: 10px; padding-left: 25px; padding-right: 25px}
 
 
             #easy-seen{display: none;}
@@ -203,19 +211,20 @@
         </form>
         <input type="button" id="Start" value="Start" onclick="StartGame();"></input><br><br>
 <!-- Easy Lvl -->
-        <section id="easy-seen"><p>20 moves</p>
+        <section id="easy-seen">
+            <p id="numberCountDown">Number of Moves left: 25 </p>
         <!-- Row 1-->
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
                 </div>
-                <div class="flip-card-back">
+                <div class="flip-card-back" >
                     <img src="Images/1.JPG" alt="avo" >
                 </div>
             </div>
         </div>
-        <div class="flip-card-click"  onclick="trackCardClicks(this);">
+        <div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="BT">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
@@ -225,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="cheese">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -237,7 +246,7 @@
         </div>
         <section></section>
         <!-- Row 2 -->
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="CM">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -247,7 +256,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="panda">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -257,7 +266,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="peas">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -269,7 +278,7 @@
         </div>
         <section></section>
         <!-- Row 3 -->
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
@@ -279,7 +288,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="BT">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -289,7 +298,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="cheese">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
@@ -301,7 +310,7 @@
         </div>
         <section></section>
         <!-- Row 4 -->
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="CM">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -311,7 +320,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="panda">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -321,7 +330,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="peas">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover" >
@@ -460,14 +469,7 @@
     <p>What did you think of the game?</p>
     <textarea rows="3" cols="30"></textarea><br>
     <a href="Resume.html">Go back to Resume</a>
-        <!--
-        <table>
-            
-                1. Smart Cookie*     2. Peas out*     3. Taco bout it*
-                4. Avo good day*     5. Choc Milk     8. bluetooth*        
-                9.cheesy*            10. pandastic*
-            
-    -->
+
     
 
 
