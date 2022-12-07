@@ -29,15 +29,16 @@
                     HardLvl.style.display = "none" 
                 } else if (ChoiceSelected === "medium"){
                 console.log("4x4 Match")
-                    MedLvl.style.display = "grid"
+                    MedLvl.style.display = "inline-block"
                     EasyLvl.style.display = "none"
                     HardLvl.style.display  = "none" 
                 } else if (ChoiceSelected === "hard"){
                     console.log("5x4 Match")
-                    HardLvl.style.display = "grid"
+                    HardLvl.style.display = "inline-block"
                     MedLvl.style.display = "none"
                     EasyLvl.style.display = "none" 
                 }
+                document.getElementById("Start").disabled = true
             
             // How to flip the card
    
@@ -62,14 +63,26 @@
             var card1 = null
             var card2 = null
             var numberClicksEasy = 25
-            var matchCount = 0
+            var numberClicksMed = 30
+            var numberClicksHard = 35
+            var matchCountEasy = 0
+            var matchCountMed = 0
+            var matchCountHard = 0
 
             async function trackCardClicks(theCard) {
                 console.log("clicked " + theCard.getAttribute("data-name"))
 
                 numberClicksEasy = numberClicksEasy - 1
-                var countDown = document.getElementById("numberCountDown")
+                var countDown = document.getElementById("numberCountDownEasy")
                 countDown.innerHTML = "Number of Moves left: " + numberClicksEasy
+
+                numberClicksMed = numberClicksMed - 1
+                var countDown = document.getElementById("numberCountDownMed")
+                countDown.innerHTML = "Number of Moves left: " + numberClicksMed
+
+                numberClicksHard = numberClicksHard - 1
+                var countDown = document.getElementById("numberCountDownHard")
+                countDown.innerHTML = "Number of Moves left: " + numberClicksHard
 
                 if (card1 == null) {
                     card1 = theCard
@@ -83,7 +96,9 @@
                 
                     if (card1.getAttribute("data-name") == card2.getAttribute("data-name")){
                         console.log("have a match")
-                        matchCount = matchCount + 1
+                        matchCountEasy = matchCountEasy + 1
+                        matchCountMed = matchCountMed + 1
+                        matchCountHard = matchCountHard + 1
                         console.log("counting match")
                     }else {if(card1 != null){
                         card1.classList.toggle('flipped');
@@ -107,13 +122,13 @@
             var MedLvl = document.getElementById("med-seen")
             var HardLvl = document.getElementById("hard-seen")
 
-            if (numberClicksEasy === 0){
+            if (numberClicksEasy === 0, numberClicksMed === 0 , numberClicksHard === 0){
                 alert("Game Over")
                 clearInterval(refreshInterval)
                 EasyLvl.innerHTML = "Please refresh."
                 MedLvl.innerHTML = "Please refresh." 
                 HardLvl.innerHTML = "Please refresh." 
-            } else if (matchCount === 6){
+            } else if (matchCountEasy === 6, matchCountMed === 8 , matchCountHard ===10){
                 alert("You win!")
                 clearInterval(refreshInterval)
                 EasyLvl.innerHTML ="Please refresh."
@@ -181,20 +196,9 @@
             }
             input {background: rgb(255, 135, 135);padding-top: 10px; padding-bottom: 10px; padding-left: 25px; padding-right: 25px}
 
-
             #easy-seen{display: none;}
-
-            #med-seen {display: none; grid-template-columns:130px 130px 130px 130px; padding: 5px;}
-            .row1-1, .row1-2, .row1-3, .row1-4, .row1-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
-            .row2-1, .row2-2, .row2-3, .row2-4, .row2-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
-            .row3-1, .row3-2, .row3-3, .row3-4, .row3-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
-            .row4-1, .row4-2, .row4-3, .row4-4, .row4-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
-
-            #hard-seen {display: none; grid-template-columns:130px 130px 130px 130px 130px; padding: 5px;}
-            .row1-1, .row1-2, .row1-3, .row1-4, .row1-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
-            .row2-1, .row2-2, .row2-3, .row2-4, .row2-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
-            .row3-1, .row3-2, .row3-3, .row3-4, .row3-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
-            .row4-1, .row4-2, .row4-3, .row4-4, .row4-5 {border: 1px; height: 120px; width: 120px; padding: 5px;}
+            #med-seen {display: none;}
+            #hard-seen {display: none;}
 
         </style>
     </head>
@@ -212,7 +216,7 @@
         <input type="button" id="Start" value="Start" onclick="StartGame();"></input><br><br>
 <!-- Easy Lvl -->
         <section id="easy-seen">
-            <p id="numberCountDown">Number of Moves left: 25 </p>
+            <p id="numberCountDownEasy">Number of Moves left: 25 </p>
         <!-- Row 1-->
         <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
             <div class="flip-card-inner">
@@ -341,130 +345,396 @@
             </div>
         </div>
     </section>
-    
+
 <!-- Med Lvl -->
         <section id="med-seen">
-            <!-- Row 1 -->
-            <div class="row1-1 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+            <p id="numberCountDownMed">Number of Moves left: 30 </p>
+    <!-- Row 1-->
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back" >
+                    <img src="Images/1.JPG" alt="avo" >
+                </div>
             </div>
-            <div class="row1-2 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row1-3 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row1-4 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <!-- Row 2-->
-            <div class="row2-1 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row2-2 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row2-3 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row2-4 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <!-- Row 3-->
-            <div class="row3-1 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row3-2 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row3-3 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <div class="row2-4 Color">
-                <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
-            </div>
-            <!-- Row 4 -->
-        <div class="row4-1 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
         </div>
-        <div class="row4-2 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="BT">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/2.JPG" alt="BT">
+                </div>
+            </div>
         </div>
-        <div class="row4-3 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="cheese">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/3.JPG" alt="cheese">
+                </div>
+            </div>
         </div>
-        <div class="row4-4 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="CM">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/4.JPG" alt="CM">
+                </div>
+            </div>
         </div>
-        </section>
+        <section></section>
+    <!-- Row 2 -->
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="panda">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/5.JPG" alt="panda">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="peas">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover" >
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/6.JPG" alt="peas">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/7.JPG" alt="SM">
+                </div>
+            </div>
+        </div>
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="Images/MatchCover.jpg" alt="Cover">
+                </div>
+                <div class="flip-card-back">
+                    <img src="Images/8.JPG" alt="taco">
+                </div>
+            </div>
+        </div>
+        <section></section>
+    <!-- Row 3 -->
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="flip-card-back" >
+                <img src="Images/1.JPG" alt="avo" >
+            </div>
+        </div>
+    </div>
+    <div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="BT">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="flip-card-back">
+                <img src="Images/2.JPG" alt="BT">
+            </div>
+        </div>
+    </div>
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="cheese">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div>
+            <div class="flip-card-back">
+                <img src="Images/3.JPG" alt="cheese">
+            </div>
+        </div>
+    </div>
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="CM">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div>
+            <div class="flip-card-back">
+                <img src="Images/4.JPG" alt="CM">
+            </div>
+        </div>
+    </div>
+    <section></section>
+<!-- Row 4 -->
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="panda">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div>
+            <div class="flip-card-back">
+                <img src="Images/5.JPG" alt="panda">
+            </div>
+        </div>
+    </div>
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="peas">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover" >
+            </div>
+            <div class="flip-card-back">
+                <img src="Images/6.JPG" alt="peas">
+            </div>
+        </div>
+    </div>
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="flip-card-back">
+                <img src="Images/7.JPG" alt="SM">
+            </div>
+        </div>
+    </div>
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="Images/MatchCover.jpg" alt="Cover">
+            </div>
+            <div class="flip-card-back">
+                <img src="Images/8.JPG" alt="taco">
+            </div>
+        </div>
+    </div>
+    <section></section>
+    </section>
 
 <!-- Hard Lvl-->
-        <section id="hard-seen">
-        <!-- Row 1 -->
-        <div class="row1-1 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+<section id="hard-seen">
+    <p id="numberCountDownHard">Number of Moves left: 35 </p>
+<!-- Row 1-->
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
         </div>
-        <div class="row1-2 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back" >
+            <img src="Images/1.JPG" alt="avo" >
         </div>
-        <div class="row1-3 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="BT">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
         </div>
-        <div class="row1-4 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/2.JPG" alt="BT">
         </div>
-        <div class="row1-5 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="cheese">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover" >
         </div>
-       <!-- Row 2-->
-        <div class="row2-1 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/3.JPG" alt="cheese">
         </div>
-        <div class="row2-2 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="CM">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover" >
         </div>
-        <div class="row2-3 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/4.JPG" alt="CM">
         </div>
-        <div class="row2-4 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="panda">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover" >
         </div>
-        <div class="row2-5 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/5.JPG" alt="panda">
         </div>
-        <!-- Row 3 -->
-        <div class="row3-1 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<section></section>
+
+<!-- Row 2 -->
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="peas">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover" >
         </div>
-        <div class="row3-2 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/6.JPG" alt="peas">
         </div>
-        <div class="row3-3 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
         </div>
-        <div class="row3-4 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/7.JPG" alt="SM">
         </div>
-        <div class="row3-5 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
         </div>
-        <!-- Row 4 -->
-        <div class="row4-1 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/8.JPG" alt="taco">
         </div>
-        <div class="row4-2 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="guy">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
         </div>
-        <div class="row4-3 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back" >
+            <img src="Images/9.JPG" alt="guy" >
         </div>
-        <div class="row4-4 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+    </div>
+    <div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="usb">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
         </div>
-        <div class="row4-5 Color">
-            <img id="match-top" src="Images/MatchCover.jpg" alt="Cover">
+        <div class="flip-card-back">
+            <img src="Images/10.JPG" alt="usb">
         </div>
-    </section>
+    </div>
+</div>
+<section></section>
+
+<!-- Row 3 -->
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="flip-card-back" >
+            <img src="Images/1.JPG" alt="avo" >
+        </div>
+    </div>
+    </div>
+    <div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="BT">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="flip-card-back">
+            <img src="Images/2.JPG" alt="BT">
+        </div>
+    </div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="cheese">
+<div class="flip-card-inner">
+    <div class="flip-card-front">
+        <img src="Images/MatchCover.jpg" alt="Cover" >
+    </div>
+    <div class="flip-card-back">
+        <img src="Images/3.JPG" alt="cheese">
+    </div>
+</div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="CM">
+<div class="flip-card-inner">
+    <div class="flip-card-front">
+        <img src="Images/MatchCover.jpg" alt="Cover" >
+    </div>
+    <div class="flip-card-back">
+        <img src="Images/4.JPG" alt="CM">
+    </div>
+</div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="panda">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover" >
+        </div>
+        <div class="flip-card-back">
+            <img src="Images/5.JPG" alt="panda">
+        </div>
+    </div>
+    </div>
+<section></section>
+
+<!-- Row 4 -->
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="peas">
+<div class="flip-card-inner">
+    <div class="flip-card-front">
+        <img src="Images/MatchCover.jpg" alt="Cover" >
+    </div>
+    <div class="flip-card-back">
+        <img src="Images/6.JPG" alt="peas">
+    </div>
+</div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
+<div class="flip-card-inner">
+    <div class="flip-card-front">
+        <img src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+    <div class="flip-card-back">
+        <img src="Images/7.JPG" alt="SM">
+    </div>
+</div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
+<div class="flip-card-inner">
+    <div class="flip-card-front">
+        <img src="Images/MatchCover.jpg" alt="Cover">
+    </div>
+    <div class="flip-card-back">
+        <img src="Images/8.JPG" alt="taco">
+    </div>
+</div>
+</div>
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="guy">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="flip-card-back">
+            <img src="Images/9.JPG" alt="guy">
+        </div>
+    </div>
+    </div>
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="usb">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img src="Images/MatchCover.jpg" alt="Cover">
+        </div>
+        <div class="flip-card-back">
+            <img src="Images/10.JPG" alt="usb">
+        </div>
+    </div>
+    </div>
+<section></section>
+</section>
+
     <br><br>
     <p>What did you think of the game?</p>
     <textarea rows="3" cols="30"></textarea><br>
