@@ -65,7 +65,9 @@
             var numberClicksEasy = 25
             var numberClicksMed = 30
             var numberClicksHard = 35
-            var matchCount = 0
+            var matchCountEasy = 0
+            var matchCountMed = 0
+            var matchCountHard = 0
 
             async function trackCardClicks(theCard) {
                 console.log("clicked " + theCard.getAttribute("data-name"))
@@ -94,7 +96,9 @@
                 
                     if (card1.getAttribute("data-name") == card2.getAttribute("data-name")){
                         console.log("have a match")
-                        matchCount = matchCount + 1
+                        matchCountEasy = matchCountEasy + 1
+                        matchCountMed = matchCountMed + 1
+                        matchCountHard = matchCountHard + 1
                         console.log("counting match")
                     }else {if(card1 != null){
                         card1.classList.toggle('flipped');
@@ -124,7 +128,7 @@
                 EasyLvl.innerHTML = "Please refresh."
                 MedLvl.innerHTML = "Please refresh." 
                 HardLvl.innerHTML = "Please refresh." 
-            } else if (matchCount === 6){
+            } else if (matchCountEasy === 6, matchCountMed === 8 , matchCountHard ===10){
                 alert("You win!")
                 clearInterval(refreshInterval)
                 EasyLvl.innerHTML ="Please refresh."
@@ -408,7 +412,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
@@ -418,7 +422,7 @@
                 </div>
             </div>
         </div>
-        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+        <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <img src="Images/MatchCover.jpg" alt="Cover">
@@ -492,7 +496,7 @@
             </div>
         </div>
     </div>
-    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img src="Images/MatchCover.jpg" alt="Cover">
@@ -502,7 +506,7 @@
             </div>
         </div>
     </div>
-    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img src="Images/MatchCover.jpg" alt="Cover">
@@ -582,7 +586,7 @@
         </div>
     </div>
 </div>
-<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="Images/MatchCover.jpg" alt="Cover">
@@ -592,7 +596,7 @@
         </div>
     </div>
 </div>
-<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="Images/MatchCover.jpg" alt="Cover">
@@ -602,7 +606,7 @@
         </div>
     </div>
 </div>
-<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="guy">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="Images/MatchCover.jpg" alt="Cover">
@@ -612,7 +616,7 @@
         </div>
     </div>
     </div>
-    <div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="BT">
+    <div class="flip-card-click"  onclick="trackCardClicks(this);" data-name="usb">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="Images/MatchCover.jpg" alt="Cover">
@@ -688,7 +692,7 @@
     </div>
 </div>
 </div>
-<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="SM">
 <div class="flip-card-inner">
     <div class="flip-card-front">
         <img src="Images/MatchCover.jpg" alt="Cover">
@@ -698,7 +702,7 @@
     </div>
 </div>
 </div>
-<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="taco">
 <div class="flip-card-inner">
     <div class="flip-card-front">
         <img src="Images/MatchCover.jpg" alt="Cover">
@@ -708,7 +712,7 @@
     </div>
 </div>
 </div>
-<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+<div class="flip-card-click" onclick="trackCardClicks(this);" data-name="guy">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="Images/MatchCover.jpg" alt="Cover">
@@ -718,7 +722,7 @@
         </div>
     </div>
     </div>
-    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
+    <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="usb">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img src="Images/MatchCover.jpg" alt="Cover">
