@@ -122,13 +122,13 @@
             var MedLvl = document.getElementById("med-seen")
             var HardLvl = document.getElementById("hard-seen")
 
-            if (numberClicksEasy === 0){
+            if (numberClicksEasy === 0 , numberClicksMed === 0 , numberClicksHard === 0){
                 alert("Game Over")
                 clearInterval(refreshInterval)
                 EasyLvl.innerHTML = "Please refresh."
                 MedLvl.innerHTML = "Please refresh." 
                 HardLvl.innerHTML = "Please refresh." 
-            } else if (matchCountEasy === 6){
+            } else if (matchCountEasy === 6 , matchCountMed === 8 , matchCountHard === 10){
                 alert("You win!")
                 clearInterval(refreshInterval)
                 EasyLvl.innerHTML ="Please refresh."
