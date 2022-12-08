@@ -107,34 +107,57 @@
                         card2.classList.toggle('flipped');
                     }
                 } 
+                check()
                 card1 = null
                 card2 = null   
             }   
         }
 
         // Game Check - way to end game
-        var refreshInterval = setInterval(check, 100)
+       // var refreshInterval = setInterval(check, 100)
 
 
         function check(){
+            var radioButton = document.getElementsByName("difficulty")
+                console.log(radioButton)
+                var ChoiceSelected = ""
+                for (let i = 0; i < radioButton.length; i = i + 1){ 
+                    console.log(radioButton[i])
+                if (radioButton[i].checked){
+                    ChoiceSelected = radioButton[i].value
+                }
+                }
+            console.log("checking game")
 
             var EasyLvl = document.getElementById("easy-seen")
             var MedLvl = document.getElementById("med-seen")
             var HardLvl = document.getElementById("hard-seen")
 
-            if (numberClicksEasy === 0 , numberClicksMed === 0 , numberClicksHard === 0){
+            if (numberClicksEasy === 0 || numberClicksMed === 0 || numberClicksHard === 0 ){
                 alert("Game Over")
-                clearInterval(refreshInterval)
+                //clearInterval(refreshInterval)
                 EasyLvl.innerHTML = "Please refresh."
                 MedLvl.innerHTML = "Please refresh." 
                 HardLvl.innerHTML = "Please refresh." 
-            } else if (matchCountEasy === 6 , matchCountMed === 8 , matchCountHard === 10){
+            } else if ( ChoiceSelected == "easy" && matchCountEasy === 6 ){
                 alert("You win!")
-                clearInterval(refreshInterval)
+                //clearInterval(refreshInterval)
                 EasyLvl.innerHTML ="Please refresh."
                 MedLvl.innerHTML = "Please refresh." 
                 HardLvl.innerHTML = "Please refresh."
-            } 
+            } else if ( ChoiceSelected == "medium" && matchCountMed === 8){
+                alert("You win!")
+                //clearInterval(refreshInterval)
+                EasyLvl.innerHTML ="Please refresh."
+                MedLvl.innerHTML = "Please refresh." 
+                HardLvl.innerHTML = "Please refresh."
+            } else if (ChoiceSelected == "hard" && matchCountHard === 10){
+                alert("You win!")
+                //clearInterval(refreshInterval)
+                EasyLvl.innerHTML ="Please refresh."
+                MedLvl.innerHTML = "Please refresh." 
+                HardLvl.innerHTML = "Please refresh."
+            }
            
         }
 
