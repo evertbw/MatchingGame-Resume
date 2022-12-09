@@ -62,9 +62,9 @@
 
             var card1 = null
             var card2 = null
-            var numberClicksEasy = 25
+            var numberClicksEasy = 24
             var numberClicksMed = 30
-            var numberClicksHard = 35
+            var numberClicksHard = 34
             var matchCountEasy = 0
             var matchCountMed = 0
             var matchCountHard = 0
@@ -107,16 +107,13 @@
                         card2.classList.toggle('flipped');
                     }
                 } 
+            // Game Check - way to end game
+
                 check()
                 card1 = null
                 card2 = null   
             }   
         }
-
-        // Game Check - way to end game
-       // var refreshInterval = setInterval(check, 100)
-
-
         function check(){
             var radioButton = document.getElementsByName("difficulty")
                 console.log(radioButton)
@@ -133,30 +130,30 @@
             var MedLvl = document.getElementById("med-seen")
             var HardLvl = document.getElementById("hard-seen")
 
-            if (numberClicksEasy === 0 || numberClicksMed === 0 || numberClicksHard === 0 ){
-                alert("Game Over")
-                //clearInterval(refreshInterval)
-                EasyLvl.innerHTML = "Please refresh."
-                MedLvl.innerHTML = "Please refresh." 
-                HardLvl.innerHTML = "Please refresh." 
-            } else if ( ChoiceSelected == "easy" && matchCountEasy === 6 ){
-                alert("You win!")
-                //clearInterval(refreshInterval)
-                EasyLvl.innerHTML ="Please refresh."
-                MedLvl.innerHTML = "Please refresh." 
-                HardLvl.innerHTML = "Please refresh."
-            } else if ( ChoiceSelected == "medium" && matchCountMed === 8){
-                alert("You win!")
-                //clearInterval(refreshInterval)
-                EasyLvl.innerHTML ="Please refresh."
-                MedLvl.innerHTML = "Please refresh." 
-                HardLvl.innerHTML = "Please refresh."
-            } else if (ChoiceSelected == "hard" && matchCountHard === 10){
-                alert("You win!")
-                //clearInterval(refreshInterval)
-                EasyLvl.innerHTML ="Please refresh."
-                MedLvl.innerHTML = "Please refresh." 
-                HardLvl.innerHTML = "Please refresh."
+            if (ChoiceSelected == "easy"){
+                if (numberClicksEasy <= 0){
+                    alert("Game Over")
+                    EasyLvl.innerHTML = "Please refresh."
+                } else if (matchCountEasy == 6){
+                    alert("You win!")
+                    EasyLvl.innerHTML ="Please refresh."
+                }
+            } else if (ChoiceSelected == "medium"){
+                if (numberClicksMed <= 0){
+                    alert("Game Over")
+                    MedLvl.innerHTML = "Please refresh."
+                } else if (matchCountMed == 8){
+                    alert("You win!")
+                    MedLvl.innerHTML ="Please refresh."
+                }
+            } else if (ChoiceSelected == "hard"){
+                if (numberClicksHard <= 0){
+                    alert("Game Over")
+                    HardLvl.innerHTML = "Please refresh."
+                } else if (matchCountHard == 10){
+                    alert("You win!")
+                    HardLvl.innerHTML ="Please refresh."
+                }
             }
            
         }
@@ -240,7 +237,7 @@
         <input type="button" id="Start" value="Start" onclick="StartGame();"></input><br><br>
 <!-- Easy Lvl -->
         <section id="easy-seen">
-            <p id="numberCountDownEasy">Number of Moves left: 25 </p>
+            <p id="numberCountDownEasy">Number of Moves left: 24 </p>
         <!-- Row 1-->
         <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
             <div class="flip-card-inner">
@@ -545,7 +542,7 @@
 
 <!-- Hard Lvl-->
 <section id="hard-seen">
-    <p id="numberCountDownHard">Number of Moves left: 35 </p>
+    <p id="numberCountDownHard">Number of Moves left: 34 </p>
 <!-- Row 1-->
 <div class="flip-card-click" onclick="trackCardClicks(this);" data-name="avo">
     <div class="flip-card-inner">
